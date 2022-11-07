@@ -1,0 +1,21 @@
+/* CSS Normalization */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap');
+
+:root {
+  /* Font Scheme */
+  --red-hat: 'Red Hat Display', sans-serif;
+}
+
+/* Global Styles */
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--red-hat);
+}
