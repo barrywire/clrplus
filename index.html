@@ -29,7 +29,8 @@
 
 <body class='d-flex h-100 text-center text-bg-dark'>
     <!-- JS import -->
-    <script src='./main.js'></script>
+    <!-- <script src='./main.js'></script> -->
+    <script src='./index.js'></script>
 
     <div class='cover-container d-flex w-100 h-100 p-3 mx-auto flex-column'>
         <header class='mb-auto'>
@@ -39,24 +40,32 @@
             </div>
         </header>
 
-        <main class='px-2'>
+        <center>
+            <!-- <main class='px-2'> -->
 
             <!-- Load an image onto a canvas -->
-            <form action='#'>
+            <!-- <form action='#'>
                 <input class='rounded' type='file' id='img_file' accept='image/*' />
                 <input class='border border-0 rounded-2' type='button' id='btn_load' value='Load site screenshot' onclick='main();' />
+            </form> -->
+
+            <form action="#">
+                <input type="file" id="imgfile" />
+                <input type="button" id="btnLoad" value="Load" onclick="main();" />
             </form>
 
             <!-- Canvas -->
-            <canvas id='canvas' width='700' height='500' class='mx-auto py-4'></canvas>
+            <!-- <canvas id='canvas' width='700' height='500' class='mx-auto py-4'></canvas> -->
+            <canvas id='canvas' class='mx-auto py-4'></canvas>
 
             <!-- Color list -->
             <div id='palette'></div>
 
             <!-- Complementary -->
-            <div id='complementary'></div>
+            <!-- <div id='complementary'></div> -->
 
-        </main>
+            <!-- </main> -->
+        </center>
 
         <footer class='mt-auto text-white-50'>
             <p>CSC 317 Group 14.</p>
