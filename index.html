@@ -43,12 +43,12 @@
 
             <!-- Load an image onto a canvas -->
             <form action='#'>
-                <input type='file' id='img_file' />
-                <input type='button' id='btn_load' value='Load site screenshot' onclick='main();' />
+                <input class='rounded' type='file' id='img_file' accept='image/*' />
+                <input class='border border-0 rounded-2' type='button' id='btn_load' value='Load site screenshot' onclick='main();' />
             </form>
 
             <!-- Canvas -->
-            <canvas id='canvas' width='500' height='500'></canvas>
+            <canvas id='canvas' width='700' height='500' class='mx-auto py-4'></canvas>
 
             <!-- Color list -->
             <div id='palette'></div>
