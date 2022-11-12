@@ -2,7 +2,8 @@ const buildPalette = (colorsList) =>
 {
     const paletteContainer = document.getElementById("palette");
     const complementaryContainer = document.getElementById("complementary");
-    // reset the HTML in case you load various images
+
+    // Reset the HTML for when the canvas has content already.
     paletteContainer.innerHTML = "";
     complementaryContainer.innerHTML = "";
 
@@ -22,19 +23,20 @@ const buildPalette = (colorsList) =>
                 orderedByColor[i - 1]
             );
 
-            // if the distance is less than 120 we ommit that color
+            // If the distance is less than 120; omit that color
             if (difference < 120)
             {
                 continue;
             }
         }
 
-        // create the div and text elements for both colors & append it to the document
+        // Create the div and text elements for both colors and append it to the document
         const colorElement = document.createElement("div");
         colorElement.style.backgroundColor = hexColor;
         colorElement.appendChild(document.createTextNode(hexColor));
         paletteContainer.appendChild(colorElement);
-        // true when hsl color is not black/white/grey
+
+        // True when hsl color is not black/white/grey
         if (hslColors[i].h)
         {
             const complementaryElement = document.createElement("div");
@@ -48,7 +50,7 @@ const buildPalette = (colorsList) =>
     }
 };
 
-//  Convert each pixel value ( number ) to hexadecimal ( string ) with base 16
+//  Convert each pixel value (number) to hexadecimal (string) with base 16
 const rgbToHex = (pixel) =>
 {
     const componentToHex = (c) =>
@@ -57,16 +59,11 @@ const rgbToHex = (pixel) =>
         return hex.length == 1 ? "0" + hex : hex;
     };
 
-    return (
-        "#" +
-        componentToHex(pixel.r) +
-        componentToHex(pixel.g) +
-        componentToHex(pixel.b)
-    ).toUpperCase();
+    return ("#" + componentToHex(pixel.r) + componentToHex(pixel.g) + componentToHex(pixel.b)).toUpperCase();
 };
 
 /**
- * Convert HSL to Hex
+ * Convert HSL to HEX
  * this entire formula can be found in stackoverflow, credits to @icl7126 !!!
  * https://stackoverflow.com/a/44134328/17150245
  */
@@ -96,9 +93,7 @@ const convertRGBtoHSL = (rgbValues) =>
 {
     return rgbValues.map((pixel) =>
     {
-        let hue,
-            saturation,
-            luminance = 0;
+        let hue, saturation, luminance = 0;
 
         // first change range from 0-255 to 0 - 1
         let redOpposite = pixel.r / 255;
@@ -246,7 +241,7 @@ const findBiggestColorRange = (rgbValues) =>
     const gRange = gMax - gMin;
     const bRange = bMax - bMin;
 
-    // determine which color has the biggest difference
+    // Finding the color with the biggest difference
     const biggestRange = Math.max(rRange, gRange, bRange);
     if (biggestRange === rRange)
     {
@@ -294,24 +289,31 @@ const quantization = (rgbValues, depth) =>
         return [color];
     }
 
-    /**
-     *  Recursively do the following:
-     *  1. Find the pixel channel (red,green or blue) with biggest difference/range
-     *  2. Order by this channel
-     *  3. Divide in half the rgb colors list
-     *  4. Repeat process again, until desired depth or base case
+/**
+     * Recursion
+     * 1. Find the pixel channel with the biggest difference/range
+     * 2. Order by this channel
+     * 3. Divide in hald the rgb colors list
+     * 4. Repeat the process again, until the desired depth or best case
      */
+
+    // 1. Pixel channel with the biggest difference/range
     const componentToSortBy = findBiggestColorRange(rgbValues);
+
+    // 2. Order by this channel
     rgbValues.sort((p1, p2) =>
     {
         return p1[componentToSortBy] - p2[componentToSortBy];
     });
 
+    // 3. Divide in hald the rgb colors list
     const mid = rgbValues.length / 2;
     return [
         ...quantization(rgbValues.slice(0, mid), depth + 1),
         ...quantization(rgbValues.slice(mid + 1), depth + 1),
     ];
+
+    // 4. Repeat the process again, until the desired depth or best case - the recursion
 };
 
 const main = () =>
