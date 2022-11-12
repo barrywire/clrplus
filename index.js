@@ -328,8 +328,6 @@ const main = () =>
         {
             // Set the canvas size to be the same as of the uploaded image
             const canvas = document.getElementById("canvas");
-            canvas.width = image.width;
-            canvas.height = image.height;
             const ctx = canvas.getContext("2d");
             ctx.drawImage(image, 0, 0);
 
